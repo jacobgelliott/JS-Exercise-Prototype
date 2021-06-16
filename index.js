@@ -78,10 +78,19 @@ function Airplane(name) {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
+ function Car(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
   }
   
+  Car.prototype.fill = function(gallons){
+    return this.tank += gallons;
+  }
+
+  const tesla = new Car('Tesla, 60');
+  tesla.fill(10);
   
   /*
     TASK 3
@@ -90,18 +99,42 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
-  }
+ function Baby(name, age, favoriteToy) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+  this.favoriteToy = favoriteToy;
+}
  
+Baby.prototype.play = function(toy){
+  return `Playing with ${this.favoriteToy}`;
+}
+
+Baby.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
+
+Baby.prototype.poop = function(){
+  this.stomach = [];
+}
+
+Baby.prototype.toString = function(){
+  return `${this.name}, ${this.age}`
+}
   
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Window/Global Object Binding
+        If you dont specify an object, this will pull from the global object.
+    2. Implicit Binding
+        By specifying the object like this = orion.saySomething, it will target the specified object, which in this case is orion.
+    3. New Binding
+        When utilizing a constructor function, you can fill in an object with the data you want, by declaring a new variable, with included data.
+    4. Explicit Binding
+        You can use call or apply, to define this.
   */
   
   
